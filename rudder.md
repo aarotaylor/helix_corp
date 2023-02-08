@@ -1,16 +1,23 @@
-# Current Goal: Cycle through background images
+# Current Goal: Hovering over picture coordinates should display flavortext
 
-*Have a default image as a background, and be able to scrub forward and backward through a set list*
+*Based on the current image, use the coordinates to place PointsOfInterest on the image*
 
 ---
 
 ## Project Specific
 
-`Initial image should be Syaksa. Forward should move through each of the track images, starting with Portal, then Penrose Engine, TFF, etc.`
+`Coordinates should be relative to the image itself.`
 
 ---
 
 # Notes
 
-- When clicking forward or back buttons, they should load a different img tag
+- Initial pass [2023-02-07]:
+    - Get the dimensions of the background image `<=`
+        - Issue: Need to access the HTML img tag to get client dimensions
+    - Keep track of mouse coordinates within the image
+    - When the cursor comes within a certain distance of the PoI, reveal
+
+
+
 
