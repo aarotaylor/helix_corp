@@ -1,6 +1,6 @@
 
 
-<img #background (mouseenter)="onMouseEnter()" (mouseout)="onMouseExit()" class="background" id='{{art[current].name}}' src='{{art[current].location}}' width="100%">
+<img #background (mousemove)="onMouseMove($event)" (mouseenter)="onMouseEnter()" (mouseout)="onMouseExit()" class="background" id='{{art[current].name}}' src='{{art[current].location}}' width="100%">
 
 <button (click)="backward()">Back</button>
 <button (click)="forward()">Forward</button>    

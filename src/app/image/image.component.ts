@@ -10,89 +10,79 @@ import { PoI, backgrounds } from '../poi';
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css'],
   template: `
-    <img #background></img>
+    <img #background " ></img>
   `
 })
-export class ImageComponent implements AfterViewInit{
-  
+export class ImageComponent implements AfterViewInit {
+
   art = [...backgrounds];
   current = 0; // index of the currently loaded background image
   img = document.getElementById(this.art[this.current].name);
   @ViewChild('background') image: ElementRef | undefined; // 
-  width = -1; // width of the currently loaded background image
-  height = -1; // height of the currently loaded background image
-  // ----------- origin coordinates for the image
-  originX = -1;
-  originY = -1;
-
-  // ----------- furthest bounds for the image
-  boundX = -1
-  boundY = -1
-  // -----------
-
+  dimensions = [-1, -1] // dimensions of the image
+  origin = [-1, -1]; // origin coordinates for the image
+  bounds = [-1, -1] // furthest bounds for the image
+  mouse = [-1, -1] // coordinates of the mouse
+  isOverImage = false;
   constructor(
-  ){  }
+  ) { }
 
 
-  
+
+
   // while the mouse is inside the image, continuously check its coordinates. If they match 
-    onMouseEnter(){
-      
-      // Setting bounds
-      this.width = this.image?.nativeElement.clientWidth;
-      this.height = this.image?.nativeElement.clientHeight;
-      this.originX = this.image?.nativeElement.x
-      this.originY = this.image?.nativeElement.y
-      this.boundX = this.originX + this.width;
-      this.boundY = this.originY + this.height;
+  onMouseEnter() {
 
-      console.log("The bounded image has vertices at: ")
-      console.log(this.originX, this.originY)
-      console.log(this.boundX, this.originY)
-      console.log(this.originX, this.boundY)
-      console.log(this.boundX, this.boundY)
-      
-      /* While mouse coordinate x is within bounds and mouse coordinate y is in bounds
-        The loop runs until it gets an exit event.
-          while looping, get the 
-      */
+    // Setting bounds
+    this.dimensions = [this.image?.nativeElement.clientWidth, this.image?.nativeElement.clientHeight]
+    this.origin = [this.image?.nativeElement.x, this.image?.nativeElement.y]
+    this.bounds = [this.origin[0] + this.dimensions[0], this.origin[1] + this.dimensions[1]];
 
-      /*
-      Observable.fromEvent(this, 'mousemove').subscribe(e => {
-        console.log(e.pageX, e.pageY)
-      })
-      */
+    console.log(this)
+    console.log(this.origin, this.bounds)
+    console.log(this.art[this.current]);
+
+  }
+
+  onMouseMove(event: MouseEvent) {
+    // check if coords are within bounds. if they are, and are on a cool spot display something
+    this.mouse = [event.screenX, event.screenY];
+
+    if (this.mouse[0] >= this.origin[0] && this.mouse[0] <= this.bounds[0]) {
+      if (this.mouse[1] >= this.origin[1] && this.mouse[1] <= this.bounds[1]) {
+        // Do the location check for PoI in the current image
+        this.isOverImage = true
+        console.log(this.art[this.current].lore)
+      }
     }
+    else this.isOverImage = false;
+  }
 
-    onMouseExit(){
-      console.log("We're out")
-      /*
-      Observable.fromEvent(this, 'mousemove').subscribe(e => {
-        console.log(e.pageX, e.pageY)
-      })
-      */
-    }
+  onMouseExit() {
+    console.log("We're out")
+    this.isOverImage = false
+  }
 
   // Cycle through art forwards
-  forward(){
-    if (this.current+1 < this.art.length){
+  forward() {
+    if (this.current + 1 < this.art.length) {
       this.current++;
       this.img = document.getElementById(this.art[this.current].name)
       console.log(this)
-    } 
+    }
     else alert('There is only Noise beyond this point.')
   }
 
   // Cycle through art backwards
-  backward(){
-    if (this.current-1 >= 0) {
+  backward() {
+    if (this.current - 1 >= 0) {
       this.current--;
       this.img = document.getElementById(this.art[this.current].name)
     }
     else alert('There is only Noise beyond this point.')
   }
 
-  ngOnInit(){ 
+  ngOnInit() {
 
   }
 

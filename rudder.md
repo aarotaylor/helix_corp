@@ -15,8 +15,9 @@
 
 - Next pass [2023-02-21]
     - hovering mouse over image calls function `done`
-    - function gets dimensions of image `<=`, and coordinates of mouse 
-    - given the coordinates of the image, and the dimensions, location of the mouse can be determined with math from the 
+    - function gets dimensions of image, and coordinates of mouse `done`
+    - given mouse coordinates, determine if they fall within a PoI
+    - if yes display a modal or similar to convey lore
 
 
 - Initial pass [2023-02-07]:
