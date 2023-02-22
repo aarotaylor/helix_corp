@@ -12,6 +12,13 @@
 
 # Notes
 
+
+- Next pass [2023-02-21]
+    - hovering mouse over image calls function `done`
+    - function gets dimensions of image `<=`, and coordinates of mouse 
+    - given the coordinates of the image, and the dimensions, location of the mouse can be determined with math from the 
+
+
 - Initial pass [2023-02-07]:
     - Get the dimensions of the background image `<=`
         - Issue: Need to access the HTML img tag to get client dimensions
