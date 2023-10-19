@@ -18,6 +18,7 @@
     - function gets dimensions of image, and coordinates of mouse `done`
     - given mouse coordinates, determine if they fall within a PoI
     - if yes display a modal or similar to convey lore
+    - we can build what we want..that's what we've always done
 
 
 - Initial pass [2023-02-07]:
