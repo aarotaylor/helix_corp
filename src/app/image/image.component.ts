@@ -47,15 +47,13 @@ export class ImageComponent implements AfterViewInit {
   onMouseMove(event: MouseEvent) {
     // check if coords are within bounds. if they are, and are on a cool spot display something
     this.mouse = [event.screenX, event.screenY];
-
-    if (this.mouse[0] >= this.origin[0] && this.mouse[0] <= this.bounds[0]) {
-      if (this.mouse[1] >= this.origin[1] && this.mouse[1] <= this.bounds[1]) {
+    console.log(this.mouse)
+    //if (this.mouse[0] >= this.origin[0] && this.mouse[0] <= this.bounds[0]) {
+      //if (this.mouse[1] >= this.origin[1] && this.mouse[1] <= this.bounds[1]) {
         // Do the location check for PoI in the current image
-        this.isOverImage = true
         console.log(this.art[this.current].lore)
-      }
-    }
-    else this.isOverImage = false;
+      //}
+    //}
   }
 
   onMouseExit() {

@@ -11,6 +11,13 @@
 ---
 
 # Notes
+- [2023-04-17]
+    - refamilliarize with established material
+    - remove unecessary components from view
+
+- [2023-02-22]
+    - { PROBLEM } => find out why mouse coordinates and image clientX/Y don't match up
+    - Need to add component to hold narrative text
 
 
 - Next pass [2023-02-21]
