@@ -2,14 +2,34 @@
 // How: Hovering over an area some radius away from the x,y coordinates present within this component.
 //  When a particular image is loaded, its corresponding Points of Interest will be loaded with it.
 
+// iteration: the x and y coordinates serve as the center of a circle with radius r, which will form the active region
+// a calculation will need to be made to determine if the cursor is within that region
+
+// iteration: the x and y coordinates will be stored as percentages; instead of using pixels (which vary based on the size of the image) we will use
+// percentages as defined by the bounds of the image. 
+
 export interface PoI {
     location: string; // file location
     x: number;
     y: number;
+    r: number; // the radius of the circle
     id: number;
     name: string;
     lore: string;
+    poi: string; // what the actual point of interest is called
+    description: string; // brief details on the poi
 }
+
+export const pointsOfInterest = [
+    {
+        id: 8,
+        location: "..\\assets\\img\\SYAKSA.jpg",
+        x: 0.5108,
+        y: 0.4788,
+        name: "Ring Sphere",
+        lore: "Core component of the Penrose Engine; generates energy via Superradiant Scattering"
+    },
+]
 
 export const backgrounds = [
     {

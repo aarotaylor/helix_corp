@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, fromEvent } from 'rxjs/';
 
-import { PoI, backgrounds } from '../poi';
+import { PoI, backgrounds, pointsOfInterest } from '../poi';
 
 
 @Component({
@@ -16,6 +16,7 @@ import { PoI, backgrounds } from '../poi';
 export class ImageComponent implements AfterViewInit {
 
   art = [...backgrounds];
+  locations = [...pointsOfInterest].filter // filter to only the initial image
   current = 0; // index of the currently loaded background image
   img = document.getElementById(this.art[this.current].name);
   @ViewChild('background') image: ElementRef | undefined; // 
@@ -46,12 +47,22 @@ export class ImageComponent implements AfterViewInit {
 
   onMouseMove(event: MouseEvent) {
     // check if coords are within bounds. if they are, and are on a cool spot display something
-    this.mouse = [event.screenX, event.screenY];
-    console.log(this.mouse)
-    //if (this.mouse[0] >= this.origin[0] && this.mouse[0] <= this.bounds[0]) {
+    // iteration: based on the current image, load all poi that are connected to that image
+
+    var mouseOnImg = [event.clientX, event.clientY]; // these mouse coordinates are from the screen, a check will need to be done to see 
+    var absX = mouseOnImg[0] / this.bounds[0]
+    var absY = mouseOnImg[1] / this.bounds[1]
+    this.mouse = [absX, absY]
+
+    //console.log(event)
+    // if they fall over the corresponding image coordinates. 
+    console.log("perc ("+absX+","+absY+"): mouse ("+mouseOnImg[0]+", "+mouseOnImg[1]+"): dim("+this.dimensions[0]+", "+this.dimensions[1]+"): org("+this.origin[0]+", "+this.origin[1]+"): bounds("+this.bounds[0]+", "+this.bounds[1]+")")
+    
+  
+    //if (mouseOnImg[0] >= this.origin[0] && this.mouse[0] <= this.bounds[0]) {
       //if (this.mouse[1] >= this.origin[1] && this.mouse[1] <= this.bounds[1]) {
         // Do the location check for PoI in the current image
-        console.log(this.art[this.current].lore)
+        //console.log(this.art[this.current].lore)
       //}
     //}
   }
@@ -62,6 +73,7 @@ export class ImageComponent implements AfterViewInit {
   }
 
   // Cycle through art forwards
+  // Should load all relevant points of interest
   forward() {
     if (this.current + 1 < this.art.length) {
       this.current++;
@@ -72,6 +84,7 @@ export class ImageComponent implements AfterViewInit {
   }
 
   // Cycle through art backwards
+  // Should load all relevant points of interest
   backward() {
     if (this.current - 1 >= 0) {
       this.current--;
@@ -80,8 +93,9 @@ export class ImageComponent implements AfterViewInit {
     else alert('There is only Noise beyond this point.')
   }
 
+  // on page load. use this to load all ponts of interest for the base image
   ngOnInit() {
-
+    //alert("this happens on initialization!")
   }
 
   ngAfterViewInit(): void {
